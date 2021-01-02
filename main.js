@@ -1,10 +1,10 @@
-//get access to the player
-//create function that will move our player 
-//create bullet 
+
+//calling bullet and player elements 
 
 let bullet = document.querySelector('.bullet')
 let player = document.querySelector('.player')
 
+//creating function that will move our player 
 document.addEventListener('keydown',function (event){
     switch(event.keyCode){
     case 87:
@@ -39,6 +39,7 @@ document.addEventListener('keydown',function (event){
 }
 })
 
+//    creating bullet    // 
 function createBullet(){
 	let bullet = document.createElement("div");
 	bullet.className = "bullet";
@@ -48,6 +49,7 @@ function createBullet(){
     
 }
 
+//     bullet  settings (shooting process)  //
 function bulletMove(bullet){
      let timerId = setInterval(function() {
           bullet.style.left = bullet.offsetLeft + 20 + "px";
@@ -61,7 +63,7 @@ function bulletMove(bullet){
    }, 20);
 
 }
-
+// creating isReadyMegabullet function , that will help you after 2 kills  //
 function isReadyMegabullet(){
     let titleForFast = document.querySelector('.title-for-fast-parent');
     let div = document.createElement('div');
@@ -73,7 +75,7 @@ function isReadyMegabullet(){
     let y = div
     intervalTimeForFastMove(y)
 
-  
+// continue isReadyMegabullet function (creating) //
     document.addEventListener('keydown',function (event){
 
         switch(event.keyCode){
@@ -84,7 +86,7 @@ function isReadyMegabullet(){
                 player.style.top = 100 + "px"
              }
          break;
-    
+// the time when I added isReadyMegabullet function , I need to move this bag too  //
          case 83:
             player.style.top = player.offsetTop + 200 + "px";
             player.style.transition = "1s"
@@ -108,7 +110,7 @@ function isReadyMegabullet(){
     titleForFast.appendChild(megaBullet);
 
 }
-
+// this function intervalTimeForFasrMove will help you to jump up //
 function intervalTimeForFastMove(x){
        let timer = 15
        let titleForFastP = document.querySelector('.title-for-fast p')
@@ -138,7 +140,7 @@ function intervalTimeForFastMove(x){
           },1000)
         
 }
-
+// creating enemy //
 function createEnemey(){
     let enemy = document.createElement('div')    
     enemy.className = "enemy"
@@ -172,15 +174,18 @@ function createEnemey(){
 }
 
 
-
+// from random positions will come enemy , {using Math.random} //
 function random(min, max) {
     let rand = min + Math.random() * (max + 1 - min);
     return Math.floor(rand);
 }
 
+// calling this function (createEnemy)
 createEnemey()
 
-var x = 0
+// this x variable inner isShot function 
+let x = 0
+//this function will check if bullet touching to enemy , enemy will be dead (removed)
 function isShot(bullet) {
     let topB = bullet.offsetTop
     let enemy = document.querySelector(".enemy");
@@ -195,15 +200,15 @@ function isShot(bullet) {
           if(topB >= topE && topB <= bottomE && leftB >= leftE){
             enemy.remove()
             createEnemey()
-            var p = document.querySelector('p')
-         for(var y = 1; y < 2; y++){
+            let p = document.querySelector('p')
+         for(let y = 1; y < 2; y++){
              x = x + y 
              p.innerText = x
-             var t = x
+             let t = x
              getRecordValue(t)
         }
-    
      }
+// piece of code about (isReadyMegabullet function) , it's same with isShot function , you can see after 2 kills 
        if(helper != null){
         let topH = helper.offsetTop;
         let bottomH = helper.offsetTop + helper.offsetHeight;
@@ -218,28 +223,31 @@ function isShot(bullet) {
 }
 
 
-
+// in this function (getRecordValue) 4 important condition about enemy and (isReadyMegabullet) function
 let helper =  document.querySelector('.helper')
 let valueofRecord = document.querySelector('.record p')
 function getRecordValue(u){
     valueofRecord.innerHTML = u 
+    // enemy will be faster if inner valueofRecord will be 3
     if(valueofRecord.innerText > 3){
       document.querySelector('.enemy').classList.toggle('active');
     }
+        // enemy will be faster if inner valueofRecord will be 5
     if(valueofRecord.innerText > 5){
         document.querySelector('.enemy').classList.toggle('adde');
     }
-    if(valueofRecord.innerText > 6){
+    // after 2 kills will be added 'helpTime classList' , and with this will be called (isReadyMegabullet) function
+    if(valueofRecord.innerText >= 2){
         if(helper != null){
         helper.classList.add('helpTime')
         
-
       }
     }
 }
 
-
-var y = 0
+// this y variable inner ( die ) function
+let y = 0
+// this function about lives , when enemy will pass to left , one of this life will be removed  
 function die() {
         let lifesBlock = document.querySelector('#lives');
 		let lives = lifesBlock.querySelector("span");
@@ -252,6 +260,7 @@ function die() {
             newValue()
     }
 }
+// continue about lives function creating process 
 function newValue(){
         for(let y = 0; y<3; y++){
             let lives = document.querySelector('#lifes')
@@ -259,7 +268,7 @@ function newValue(){
             lives.appendChild(span)
     }
 }
-
+// after 3 lives our game will be reloaded
 function endGame() {
     location.reload();
     if(location.reload){
@@ -268,6 +277,7 @@ function endGame() {
     }
 }
 
+// this i variable inner timeForCity function , this is simple function that using with css background changing
 let i = 10
 let timerForCity = setInterval(function(){
     if(i === 7){
@@ -280,4 +290,6 @@ let timerForCity = setInterval(function(){
     console.log(i)
     i -=1
 },1000)
+
+////////////// thx for watching my code :D ///////////////
 
