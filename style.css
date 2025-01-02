@@ -43,7 +43,7 @@ body{
 
 }
 .enemy{
-    background: url('enemy.gif');
+    background: url('vilo.png');
     background-repeat: no-repeat;
     width: 100px;
     height: 70px;
